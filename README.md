@@ -163,7 +163,7 @@ Para realizar as atividades dos Laboratórios Hands-on e projetos Mão na massa 
 
     >**Note:** You might need to wait a few minutes and refresh the page if the record sets are not listed.
 
-1. Switch to the SSH session to **WGVM1**.
+1. Switch to the RDP session to **WGVM1**.
 
 1. In the Terminal console, run the following to test internal name resolution of the **WGVM1** DNS record set in the newly created private DNS zone:
 
