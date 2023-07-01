@@ -10,7 +10,7 @@ Para realizar as atividades dos Laboratórios Hands-on e projetos Mão na massa 
 ## Day 1
 
 ## Project Day 1 - Deploy Hub-Spoke Networking and High Availability
-
+<br></br>
 
    ![Screenshot of the Hub-spoke](/AllFiles/Images/Hub-Spoke.png)
 
