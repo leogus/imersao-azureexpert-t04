@@ -11,6 +11,7 @@ Para realizar as atividades dos Laboratórios Hands-on e projetos Mão na massa 
 
 ## Project Day 1 - Deploy Hub-Spoke Networking and High Availability
 
+
    ![Screenshot of the Hub-spoke](/AllFiles/Images/Hub-Spoke.png)
 
 ## Lab 1 - Deploy Virtual Network (15 minutes)
