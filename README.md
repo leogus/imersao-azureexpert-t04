@@ -9,7 +9,7 @@ Para realizar as atividades dos Laboratórios Hands-on e projetos Mão na massa 
 ### Hands-on Lab
 ## Day 1
 
-## Project - Deploy Hub-Spoke Networking and High Availability
+## Deploy Virtual Machines, Hub-Spoke Networking and High Availability
 <br></br>
 
    ![Screenshot of the Hub-spoke](/AllFiles/Images/Hub-Spoke.png)
@@ -822,9 +822,8 @@ Para realizar as atividades dos Laboratórios Hands-on e projetos Mão na massa 
 
     -  From within the WGWEB1 VM Bastion connection session, initiate a Remote Desktop session to the WGSQL1 via its private IP address (10.8.1.4). This should be successful since it is allowed by Azure Firewall.
 
-## Project - Deploy Hub-spoke Archicture (30 minutes)
-
-Implement a Hub-spoke topology
+## Project - Deploy Hub-Spoke Networking and High Availability
+<br></br>
 
    ![Screenshot of the Hub-spoke](/AllFiles/Images/Hub-Spoke.png)
 
