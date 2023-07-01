@@ -4,9 +4,9 @@
   "parameters": {
     "vmstorageType": {
       "type": "string",
-      "defaultValue": "Standard_LRS",
+      "defaultValue": "Premium_LRS",
       "allowedValues": [
-        "Standard_LRS"
+        "Premium_LRS"
       ]
     },
     "adminUsername": {
