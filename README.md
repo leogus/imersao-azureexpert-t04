@@ -403,7 +403,7 @@ Para realizar as atividades dos Laboratórios Hands-on e projetos Mão na massa 
 
 1. In the Azure portal, search for **Private DNS Zones** and select **woodgrove.corp**
 
-1. Click **Add** and create a new **Virtual networking links**, on the **WGVNet2**.
+1. Click **Add** and create a new **Virtual networking links**, create a new **VNL-WGVNet2** and select enable **Auto registration** on the **WGVNet2**.
 
 1. At the top of the Azure portal, enter the name of a **WGVM1** that is in the running state, in the search box. When the name of the VM appears in the search results, select it.
 
