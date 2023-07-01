@@ -220,53 +220,7 @@ Para realizar as atividades dos Laboratórios Hands-on e projetos Mão na massa 
 
 1. Examine the navegate on Application was successful.
 
-## Lab 6 - Configure Azure VNET Peering (15 minutes)
-
-1. In the Azure portal, search for and select **Virtual networks**.
-
-1. In the list of virtual networks, click **WGVNet1**.
-
-1. On the **WGVNet2** virtual network blade, in the **Settings** section, click **Peerings** and then click **+ Add**.
-
-1. Specify the following settings (leave others with their default values) and click **Add**:
-
-    | Setting | Value|
-    | --- | --- |
-    | This virtual network: Peering link name | **WGVNet2-to-WGVNet1** |
-    | This virtual network: Traffic to remote virtual network | **Allow (default)** |
-    | This virtual network: Traffic forwarded from remote virtual network | **Allow (default)** |
-    | Virtual network gateway | **None** |
-    | Remote virtual network: Peering link name | **WGVNet1-to-WGVNet2** |    
-    | Virtual network deployment model | **Resource manager** |
-    | I know my resource ID | unselected |
-    | Subscription | the name of the Azure subscription you are using in this lab |
-    | Virtual network | **WGVNet1** |
-    | Traffic to remote virtual network | **Allow (default)** |
-    | Traffic forwarded from remote virtual network | **Allow (default)** |
-    | Virtual network gateway | **None** |
-
-1. In the Azure portal, search for **Private DNS Zones** and select **woodgrove.corp**
-
-1. Click **Add** and create a new **Virtual networking links**, on the **WGVNet2**.
-
-1. At the top of the Azure portal, enter the name of a **WGVM1** that is in the running state, in the search box. When the name of the VM appears in the search results, select it.
-
-1. Under Settings on the left, select **Networking**, and navigate to the network interface resource by selecting its name. View network interfaces.
-
-1. On the left, select **Effective routes**. The effective routes for a network interface are shown.
-    
-1. Connect Virtual Machine on the **WGVNet1**, in the session SSH.
-
-1. In the terminal session, run the following to test connectivity to **WGWEB1**.
-
-   ```shell
-   telnet WGWEB1.woodgrove.corp 80
-   ```
-    >**Note**: The test uses TCP 80 since this is this port is allowed by default by operating system firewall. 
-
-1. Examine the output of the command and verify that the connection was successful.
-
-## Lab 7 - Network Security groups (30 minutes)
+## Lab 6 - Network Security groups (30 minutes)
 
 1.  In the Azure portal, select **+ Create a resource**. In the **Search the Marketplace** box, search for and select **Application security group**. Next, on the **Application security group** blade, select **Create**.
 
@@ -421,6 +375,52 @@ Para realizar as atividades dos Laboratórios Hands-on e projetos Mão na massa 
 1. Within the computer, start Browser and navigate to **IP Public address** of the **WGWEB1**.
 
 1. Examine the navegate on Application was successful.
+
+## Lab 7 - Configure Azure VNET Peering (15 minutes)
+
+1. In the Azure portal, search for and select **Virtual networks**.
+
+1. In the list of virtual networks, click **WGVNet1**.
+
+1. On the **WGVNet2** virtual network blade, in the **Settings** section, click **Peerings** and then click **+ Add**.
+
+1. Specify the following settings (leave others with their default values) and click **Add**:
+
+    | Setting | Value|
+    | --- | --- |
+    | This virtual network: Peering link name | **WGVNet2-to-WGVNet1** |
+    | This virtual network: Traffic to remote virtual network | **Allow (default)** |
+    | This virtual network: Traffic forwarded from remote virtual network | **Allow (default)** |
+    | Virtual network gateway | **None** |
+    | Remote virtual network: Peering link name | **WGVNet1-to-WGVNet2** |    
+    | Virtual network deployment model | **Resource manager** |
+    | I know my resource ID | unselected |
+    | Subscription | the name of the Azure subscription you are using in this lab |
+    | Virtual network | **WGVNet1** |
+    | Traffic to remote virtual network | **Allow (default)** |
+    | Traffic forwarded from remote virtual network | **Allow (default)** |
+    | Virtual network gateway | **None** |
+
+1. In the Azure portal, search for **Private DNS Zones** and select **woodgrove.corp**
+
+1. Click **Add** and create a new **Virtual networking links**, on the **WGVNet2**.
+
+1. At the top of the Azure portal, enter the name of a **WGVM1** that is in the running state, in the search box. When the name of the VM appears in the search results, select it.
+
+1. Under Settings on the left, select **Networking**, and navigate to the network interface resource by selecting its name. View network interfaces.
+
+1. On the left, select **Effective routes**. The effective routes for a network interface are shown.
+    
+1. Connect Virtual Machine on the **WGVNet1**, in the session SSH.
+
+1. In the terminal session, run the following to test connectivity to **WGWEB1**.
+
+   ```shell
+   telnet WGWEB1.woodgrove.corp 80
+   ```
+    >**Note**: The test uses TCP 80 since this is this port is allowed by default by operating system firewall. 
+
+1. Examine the output of the command and verify that the connection was successful.
 
 ## Lab 8 - Deploy Azure Bastion (15 minutes)
 
