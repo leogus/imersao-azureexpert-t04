@@ -1,15 +1,15 @@
 # Imersão Azure Expert - Turma 4
 
-Realização: Maia Academy e Azure Expert
+## Realização: Maia Academy e Azure Expert
 
-Este é o repositório que contém o material Online e Hands-on da Imersão.
+Este é o repositório que contém o material Online da Imersão.
 
-Para realizar as atividades do Hands-on Lab estamos utilizando o Portal do Azure no idioma Inglês a fim de manter o padrão e não haver erros, e se necessário caso tenha alguma dificuldade no entendimento você pode abrir o [Google Tradutor](https://translate.google.com.br/) e traduzir para melhor entendimento.
+Para realizar as atividades dos Laboratórios Hands-on e projetos Mão na massa estamos utilizando o Portal do Azure no idioma Inglês a fim de manter o padrão e não haver erros, e se necessário caso tenha alguma dificuldade no entendimento você pode abrir o [Google Tradutor](https://translate.google.com.br/) e traduzir para melhor entendimento.
 
 ### Hands-on Lab
 ## Day 1
 
-## Exercise 1.1 - Deploy Virtual Networks for Hub (15 minutes)
+## Lab 1 - Deploy Virtual Network (15 minutes)
 
 1. In the Azure portal, search for and select **Virtual networks**, and, on the **Virtual networks** blade, click **+ Add**.
 
@@ -55,7 +55,7 @@ Para realizar as atividades do Hands-on Lab estamos utilizando o Portal do Azure
 
 1. Explore properties to Virtual networks.
 
-## Exercise 1.2 - Deploy Virtual Machine for Hub (15 minutes)
+## Lab 2 - Deploy Virtual Machine (15 minutes)
 
 1. In the Azure portal, search for and select **Virtual machines** and, on the **Virtual machines** blade, click **+ Add**.
 
@@ -68,13 +68,13 @@ Para realizar as atividades do Hands-on Lab estamos utilizando o Portal do Azure
     | Virtual machine name | **WGVM1** |
     | Region | select same region the Resouce group | 
     | Availability options | **No** |
-    | Image | **Ubuntu Server 18.04 LTS - Gen1** |
+    | Image | **Windows Server 2019 Datacenter - Gen 2** |
     | Azure Spot instance | **No** |
-    | Size | **Standard_B1ms or other** |
+    | Size | **Standard_B2s or other** |
     | Authentication type | Password |
-    | Username | **admaz** |
-    | Password | **Arqu1t3t0Cl0ud*** |
-    | Public inbound ports | **SSH (22) and HTTP (80)** |
+    | Username | **demouser** |
+    | Password | **demo@pass123*** |
+    | Public inbound ports | **RDP (3389) and HTTP (80)** |
      | | |
 
 1. Click **Next: Disks >** and, on the **Disks** tab of the **Create a virtual machine** blade, specify the following settings (leave others with their default values):
@@ -93,7 +93,7 @@ Para realizar as atividades do Hands-on Lab estamos utilizando o Portal do Azure
     | Public IP | **WGVM1-PI** |
     | NIC network security group | **Basic** |
     | Accelerated networking | **Off** |
-	| Inbound Ports | **SSH (22) and HTTP (80)** |
+	| Inbound Ports | **RDP (3389) and HTTP (80)** |
     | Place this virtual machine behind an existing load balancing solution? | **No** |
     | | |
 
@@ -107,18 +107,19 @@ Para realizar as atividades do Hands-on Lab estamos utilizando o Portal do Azure
     
 1. On the **Review + Create** blade, click **Create**.
 
-1. Connect Virtual machine, in the session SSH.
+1. Connect Virtual machine, in the session RDP.
 
-1. In the terminal session, run the following for install NGINX Web Server to **WGVM1**.
+1. Install the Web-Server feature in the virtual machine by running the following command in the **Administrator Windows PowerShell** command prompt. You can copy and paste this command.
 
-   ```shell
-   sudo apt-get -y update
-   sudo apt-get -y install nginx
+   ```powershell
+   Install-WindowsFeature -name Web-Server -IncludeManagementTools
+   Remove-item  C:\inetpub\wwwroot\iisstart.htm
+   Add-Content -Path "C:\inetpub\wwwroot\iisstart.htm" -Value $("Lab 2 is running " + $env:computername)
    ```
 
 1. Within the computer, start Browser and navigate on **Public IP Address** of the **WGVM1**.
 
-## Exercise 1.3 - Configure Azure DNS for internal name resolution for Hub (15 minutes)
+## Lab 3 - Configure Azure DNS for internal name resolution for Hub (15 minutes)
 
 1. In the Azure portal, search for and select **Private DNS zones** and, on the **Private DNS zones** blade, click **+ Add**.
 
@@ -167,7 +168,7 @@ Para realizar as atividades do Hands-on Lab estamos utilizando o Portal do Azure
 
 1. Verify that the output of the command includes the private IP address of **WGVM1**.
 
-## Exercise 2.1 - Deploy Virtual Networks and Application for Spoke (30 minutes)
+## Lab 4 - Deploy Virtual Network Spoke for Application (15 minutes)
 
 1. In the Azure portal, search for and select **Virtual networks**, and, on the **Virtual networks** blade, click **+ Add**.
 
@@ -200,7 +201,7 @@ Para realizar as atividades do Hands-on Lab estamos utilizando o Portal do Azure
     | Route table | **None** |
     | | |
 
-## Exercise 2.2 - Deploy Woodgrove Application for Spoke (30 minutes)
+## Lab 5 - Deploy Woodgrove Application for Spoke (30 minutes)
 
 1. Deploy the template **woodgrove.json** to a new resource group. This template deploys a two virtual machines running application and database.
 
@@ -214,7 +215,7 @@ Para realizar as atividades do Hands-on Lab estamos utilizando o Portal do Azure
 
 1. Examine the navegate on Application was successful.
 
-## Exercise 3 - Configure Azure VNET Peering (15 minutes)
+## Lab 6 - Configure Azure VNET Peering (15 minutes)
 
 1. In the Azure portal, search for and select **Virtual networks**.
 
@@ -260,7 +261,7 @@ Para realizar as atividades do Hands-on Lab estamos utilizando o Portal do Azure
 
 1. Examine the output of the command and verify that the connection was successful.
 
-## Exercise 4 - Network Security groups (30 minutes)
+## Lab 7 - Network Security groups (30 minutes)
 
 1.  In the Azure portal, select **+ Create a resource**. In the **Search the Marketplace** box, search for and select **Application security group**. Next, on the **Application security group** blade, select **Create**.
 
@@ -416,7 +417,7 @@ Para realizar as atividades do Hands-on Lab estamos utilizando o Portal do Azure
 
 1. Examine the navegate on Application was successful.
 
-## Exercise 5 - Deploy Azure Bastion (15 minutes)
+## Lab 8 - Deploy Azure Bastion (15 minutes)
 
 1.  In the Azure portal, select **+ Create a resource** then select **Bastion**. In the search results, select the Bastion service with Microsoft as the publisher.
 
@@ -450,7 +451,7 @@ Para realizar as atividades do Hands-on Lab estamos utilizando o Portal do Azure
 
  - Password demo@pass123
 
-## Exercise 6 - Configure Route Tables (15 minutes)
+## Lab 9 - Configure Route Tables (15 minutes)
 
 1.  On the main portal menu, select **+ Create a Resource**. Type **route** into the search box, and select **Route table** then select **Create**.
 
@@ -534,7 +535,7 @@ Para realizar as atividades do Hands-on Lab estamos utilizando o Portal do Azure
 
 5.    >**Note:** The route tables and routes you have just created are not associated with any subnets yet, so they are not impacting any traffic flow yet. This will be accomplished later in the lab.
 
-## Exercise 7 - Deploy Azure Firewall (30 minutes)
+## Exercise 10 - Deploy Azure Firewall (30 minutes)
 
 1.  In the Azure portal, select **+ Create a resource**. In the **Search the Marketplace** text box, type **Firewall**, in the list of results, select **Firewall**, and on the **Firewall** blade, select **Create**.
 
@@ -634,7 +635,7 @@ Para realizar as atividades do Hands-on Lab estamos utilizando o Portal do Azure
 
 1. Start Browser and navigate on **Public IP Address** of the **AzureFirewall**.
 
-## Exercise 8 - Configure VPN Gateway Site-to-Site (30 minutes)
+## Lab 11 - Configure VPN Gateway Site-to-Site (30 minutes)
 
 1.  In the Azure portal, select **+ Create a resource**, then in the **Search the Marketplace** box, search for and select **Virtual network**. Select **Create**.
 
