@@ -9,7 +9,7 @@ Para realizar as atividades dos Laboratórios Hands-on e projetos Mão na massa 
 ### Hands-on Lab
 ## Day 1
 
-## Project Day 1 - Deploy Hub-Spoke Networking and High Availability
+## Project - Deploy Hub-Spoke Networking and High Availability
 <br></br>
 
    ![Screenshot of the Hub-spoke](/AllFiles/Images/Hub-Spoke.png)
@@ -119,7 +119,7 @@ Para realizar as atividades dos Laboratórios Hands-on e projetos Mão na massa 
    ```powershell
    Install-WindowsFeature -name Web-Server -IncludeManagementTools
    Remove-item  C:\inetpub\wwwroot\iisstart.htm
-   Add-Content -Path "C:\inetpub\wwwroot\iisstart.htm" -Value $("Lab 2 is running " + $env:computername)
+   Add-Content -Path "C:\inetpub\wwwroot\iisstart.htm" -Value $("Hub Networking is running " + $env:computername)
    ```
 
 1. Within the computer, start Browser and navigate on **Public IP Address** of the **WGVM1**.
