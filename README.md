@@ -416,6 +416,7 @@ Para realizar as atividades dos Laboratórios Hands-on e projetos Mão na massa 
 1. In the terminal session, run the following to test connectivity to **WGWEB1**.
 
    ```shell
+   install-windowsfeature telnet-client
    telnet WGWEB1.woodgrove.corp 80
    ```
     >**Note**: The test uses TCP 80 since this is this port is allowed by default by operating system firewall. 
