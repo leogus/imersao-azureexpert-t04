@@ -380,7 +380,7 @@ Para realizar as atividades dos Laboratórios Hands-on e projetos Mão na massa 
 
 1. In the Azure portal, search for and select **Virtual networks**.
 
-1. In the list of virtual networks, click **WGVNet1**.
+1. In the list of virtual networks, click **WGVNet2**.
 
 1. On the **WGVNet2** virtual network blade, in the **Settings** section, click **Peerings** and then click **+ Add**.
 
