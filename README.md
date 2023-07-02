@@ -969,11 +969,11 @@ References: [Hub-spoke network topology](https://docs.microsoft.com/en-us/azure/
     | Setting | Value | 
     | --- | --- |
     | Subscription | the name of the Azure subscription you will be using in this lab |
-    | Resource group | the name of a new resource group **RG-IAE-HA** |
+    | Resource group | the name of a new resource group **RG-AzureExpert** |
     | Virtual machine name | **VMWEB01** and **VMWEB02** |
     | Region | select one of the regions that support availability zones and where you can provision Azure virtual machines | 
     | Availability options | **Availability zone** |
-    | Availability zone | **1** and **2** or **3** |
+    | Availability zone | **1** and **2** or **3* or *none** |
     | Image | **Windows Server 2019** |
     | Azure Spot instance | **No** |
     | Size | **Standard B1ms** |
@@ -1021,8 +1021,6 @@ References: [Hub-spoke network topology](https://docs.microsoft.com/en-us/azure/
 1. Test open Browser to IP Address the Virtual machines.
 
 1. Verify that the browser window displays the message **Static page and servername**.
-
-1. In Virtual machines, select **VMWEB01 or VMWEB02** and click **Stop**. 
 
 1. Open another browser window but this time by using InPrivate mode and verify whether the target vm changes (as indicated by the message).
 
@@ -1079,7 +1077,7 @@ Test open Browser to IP Address the Virtual machines.
    - **Tier**: Select **Standard v2**.
    - **Enable autoscaling**: Select **No**.
    - **Instance count**: Select **1**.
-   - **Availabity zone**: Select **1, 2 or 3**.
+   - **Availabity zone**: Select **1, 2 or 3** or **none*.
 
  2. Under **Configure virtual network**, select your Virtual network, enter the following values to create the subnet:
 
@@ -1151,7 +1149,7 @@ Test open Browser to IP Address the Virtual machines.
 
 3. Check the response. A valid response verifies that the application gateway was successfully created and can successfully connect with the backend.
 
-   Refresh the browser multiple times and you should see connections to both **VMWEB01** and **VMWEB02**.
+   Refresh the browser multiple times and you should see connections to both **VMWEB01** and **VMWEB02**, stop Virtual machines for test.
 
 ## Lab 2 - Azure Virtual Machine Scale Sets (30 minutes)
 
