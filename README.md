@@ -959,7 +959,7 @@ References: [Hub-spoke network topology](https://docs.microsoft.com/en-us/azure/
 4. Change the currency to Brazilian Real (R$), then select Export to download a copy of the estimate for offline viewing in Microsoft Excel (.xlsx) format.
 
 
-## Lab #01 - Azure Load Balancer (30 minutes)
+## Lab 1 - Azure Load Balancer (30 minutes)
 
 1. Sign in to the [Azure portal](http://portal.azure.com).
 
@@ -1138,7 +1138,7 @@ Test open Browser to IP Address the Virtual machines.
 
 1. Open another browser window but this time by using InPrivate mode and verify whether the target vm changes (as indicated by the message).
 
-## Lab #02 - Azure Virtual Machine Scale Sets (30 minutes)
+## Lab 2 - Azure Virtual Machine Scale Sets (30 minutes)
 
 1. Log in to the **Azure portal** at https://portal.azure.com.
 
