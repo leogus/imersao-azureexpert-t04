@@ -958,8 +958,7 @@ References: [Hub-spoke network topology](https://docs.microsoft.com/en-us/azure/
 
 4. Change the currency to Brazilian Real (R$), then select Export to download a copy of the estimate for offline viewing in Microsoft Excel (.xlsx) format.
 
-
-## Lab 1 - Azure Load Balancer (30 minutes)
+## Lab 1 - Azure Application Gateway (30 minutes)
 
 1. Sign in to the [Azure portal](http://portal.azure.com).
 
@@ -994,7 +993,7 @@ References: [Hub-spoke network topology](https://docs.microsoft.com/en-us/azure/
 
     | Setting | Value | 
     | --- | --- |
-    | Virtual Network | the name of a virtual network **VNET-IAE-Hub** |
+    | Virtual Network | the name of a virtual network **VNET-AzureExpert** |
     | Subnet | **Default** |
     | Public IP | **VMWEB01-PI** and **VMWEB02 (None)** |
     | NIC network security group | **None** |
@@ -1011,76 +1010,21 @@ References: [Hub-spoke network topology](https://docs.microsoft.com/en-us/azure/
 
 1. Connect the Virtual machines.
 
-**Note**
-Test open Browser to IP Address the Virtual machines.
+1. Install the Web-Server feature in the virtual machine by running the following command in the **Administrator Windows PowerShell** command prompt. You can copy and paste this command.
 
-1. In the Azure portal, search and select **Load balancers** and, on the **Load balancers** blade, click **+ Create**.
+   ```powershell
+   Install-WindowsFeature -name Web-Server -IncludeManagementTools
+   Remove-item  C:\inetpub\wwwroot\iisstart.htm
+   Add-Content -Path "C:\inetpub\wwwroot\iisstart.htm" -Value $("Azure Expert - Web Server is running " + $env:computername)
+   ```
 
-1. Create a load balancer with the following settings (leave others with their default values):
+1. Test open Browser to IP Address the Virtual machines.
 
-    | Setting | Value |
-    | --- | --- |
-    | Subscription | the name of the Azure subscription you are using in this lab |
-    | Resource group | **RG-IAE-HA** |
-    | Name | **ALBWEB** |
-    | Region| name of the Azure region into which you deployed all other resources in this lab |
-    | Type | **Public** |
-    | SKU | **Standard** |
-    | Public IP address | **Create new** |
-    | Public IP address name | **ALBWEB-PI** |
-    | Availability zone | **Zone-redundant** |
-    | Add a public IPv6 address | **No** |
+1. Verify that the browser window displays the message **Static page and servername**.
 
-    > **Note**: Wait for the Azure load balancer to be provisioned. This should take about 2 minutes. 
+1. In Virtual machines, select **VMWEB01 or VMWEB02** and click **Stop**. 
 
-1. On the deployment blade, click **Go to resource**.
-
-1. On the **ALBIAEWEB** load balancer blade, click **Backend pools** and click **+ Add**.
-
-1. Add a backend pool with the following settings (leave others with their default values):
-
-    | Setting | Value |
-    | --- | --- |
-    | Name | **BP-WEB** |
-    | Virtual network | *create a new* **VNET-AzureExpert** |
-    | IP version | **IPv4** |
-    | Virtual machine | **VMWEB01** | 
-    | Virtual machine IP address | associate IP address |
-    | Virtual machine | **VMWEB02** |
-    | Virtual machine IP address | associate IP address |
-
-1. Wait for the backend pool to be created, click **Health probes**, and then click **+ Add**.
-
-1. Add a health probe with the following settings (leave others with their default values):
-
-    | Setting | Value |
-    | --- | --- |
-    | Name | **HP-WEB** |
-    | Protocol | **TCP** |
-    | Port | **80** |
-    | Interval | **5** |
-    | Unhealthy threshold | **2** |
-
-1. Wait for the health probe to be created, click **Load balancing rules**, and then click **+ Add**.
-
-1. Add a load balancing rule with the following settings (leave others with their default values):
-
-    | Setting | Value |
-    | --- | --- |
-    | Name | **LBR-WEB** |
-    | IP Version | **IPv4** |
-    | Protocol | **TCP** |
-    | Port | **80** |
-    | Backend port | **80** |
-    | Backend pool | **BP-WEB** |
-    | Health probe | **HP-WEB** |
-    | Session persistence | **None** |
-    | Idle timeout (minutes) | **4** |
-    | TCP reset | **Disabled** |
-    | Floating IP (direct server return) | **Disabled** |
-    | Use outbound rules to provide backend pool members access to the internet. | **Enabled** |
-
-1. Wait for the load balancing rule to be created, click **Overview**, and note the value of the **Public IP address**.
+1. Open another browser window but this time by using InPrivate mode and verify whether the target vm changes (as indicated by the message).
 
 1. In the Azure portal, search for and select **Network security groups**, and, on the **Network security groups** blade, click **+ Add**.
 
@@ -1089,13 +1033,13 @@ Test open Browser to IP Address the Virtual machines.
     | Setting | Value |
     | --- | --- |
     | Subscription | the name of the Azure subscription you are using in this lab |
-    | Resource Group | **RG-IAE-Network** |
-    | Name | **NSG-ALB-WEB** |
+    | Resource Group | **RG-AzureExpert** |
+    | Name | **NSG-WEB** |
     | Region | the name of the Azure region where you deployed all other resources in this lab |
 
-1. On the deployment blade, click **Go to resource** to open the **NSG-ALB-WEB** network security group blade. 
+1. On the deployment blade, click **Go to resource** to open the **NSG-WEB** network security group blade. 
 
-1. On the **NSG-ALB-WEB** network security group blade, in the **Settings** section, click **Inbound security rules**. 
+1. On the **NSG-WEB** network security group blade, in the **Settings** section, click **Inbound security rules**. 
 
 1. Add an inbound rule with the following settings (leave others with their default values):
 
@@ -1110,9 +1054,9 @@ Test open Browser to IP Address the Virtual machines.
     | Priority | **100** |
     | Name | **Allow-HTTP** |
 
-1. On the **NSG-ALB-WEB** network security group blade, in the **Settings** section, click **Network interfaces** and then click **+ Associate**.
+1. On the **NSG-WEB** network security group blade, in the **Settings** section, click **Network interfaces** and then click **+ Associate**.
 
-1. Associate the **NSG-ALB-WEB** network security group with the Network interfaces **VMWEB01 and VMWEB02**.
+1. Associate the **NSG-WEB** network security group with the Network interfaces **VMWEB01 and VMWEB02**.
 
     >**Note**: It may take up to 5 minutes for the rules from the newly created Network Security Group to be applied to the Network Interface Card.
 
@@ -1120,23 +1064,94 @@ Test open Browser to IP Address the Virtual machines.
 
 1. Select the name of your Network security group.
 
-1. Connect the Virtual machines.
 
-1. Install the Web-Server feature in the virtual machine by running the following command in the **Administrator Windows PowerShell** command prompt. You can copy and paste this command.
+**Note**
+Test open Browser to IP Address the Virtual machines.
 
-   ```powershell
-   Install-WindowsFeature -name Web-Server -IncludeManagementTools
-   Remove-item  C:\inetpub\wwwroot\iisstart.htm
-   Add-Content -Path "C:\inetpub\wwwroot\iisstart.htm" -Value $("Azure Expert - Web Server is running " + $env:computername)
-   ```
+1. On the Azure portal menu or from the **Home** page, select **Create a resource**. The **New** window appears.
 
-1. Test open Browser to IP Address the Virtual machines.
+2. Select **Networking** and then select **Application Gateway** in the **Featured** list.
 
-1. Verify that the browser window displays the message **Static page and servername**.
+1. On the **Basics** tab, enter these values for the following application gateway settings:
 
-1. In Virtual machines, select **VMIAEWEB01 or VMIAEWEB02** and click **Stop**. 
+   - **Resource group**: Select **RG-AzureExpert** for the resource group. If it doesn't exist, select **Create new** to create it.
+   - **Application gateway name**: Enter **AAGWEB** for the name of the application gateway.
+   - **Tier**: Select **Standard v2**.
+   - **Enable autoscaling**: Select **No**.
+   - **Instance count**: Select **1**.
+   - **Availabity zone**: Select **1, 2 or 3**.
 
-1. Open another browser window but this time by using InPrivate mode and verify whether the target vm changes (as indicated by the message).
+ 2. Under **Configure virtual network**, select your Virtual network, enter the following values to create the subnet:
+
+    - **Subnet name**: Change the name of this subnet to **ApplicationGateway**. The application gateway subnet can contain only application gateways. No other resources are allowed.
+
+    - **Address range** (###.###.###.#/24): In the second row of the **Subnets** Grid, enter an address range that doesn't overlap with the address range of subnet.
+
+    Select **OK** to close the **Virtual network** window and save the virtual network settings.
+    
+3. On the **Basics** tab, accept the default values for the other settings and then select **Next: Frontends**.
+
+1. On the **Frontends** tab, verify **Frontend IP address type** is set to **Public**.
+
+2. Select **Add new** for the **Public IP address** and enter **AAGWEB-PI** for the public IP address name, and then select **OK**. 
+
+3. Select **Next: Backends**.
+
+1. On the **Backends** tab, select **Add a backend pool**.
+
+2. In the **Add a backend pool** window that opens, enter the following values to create an empty backend pool:
+
+    - **Name**: Enter **BP-WEB** for the name of the backend pool.
+    - **Add backend pool without targets**: Select **Yes** to create a backend pool with no targets. You'll add backend targets after creating the application gateway.
+
+3. In the **Add a backend pool** window, select **Add** to save the backend pool configuration and return to the **Backends** tab.
+
+4. On the **Backends** tab, select **Next: Configuration**.
+
+1. On the **Configuration** tab, you'll connect the frontend and backend pool you created using a routing rule.
+
+1. Select **Add a routing rule** in the **Routing rules** column.
+
+2. In the **Add a routing rule** window that opens, enter **RR-WEB** for the **Rule name**.
+
+3. A routing rule requires a listener. On the **Listener** tab within the **Add a routing rule** window, enter the following values for the listener:
+
+    - **Listener name**: Enter **L-WEB** for the name of the listener.
+    - **Frontend IP**: Select **Public** to choose the public IP you created for the frontend.
+  
+      Accept the default values for the other settings on the **Listener** tab, then select the **Backend targets** tab to configure the rest of the routing rule.
+
+4. On the **Backend targets** tab, select **BP-WEB** for the **Backend target**.
+
+5. For the **HTTP setting**, select **Add new** to add a new HTTP setting. The HTTP setting will determine the behavior of the routing rule. In the **Add an HTTP setting** window that opens, enter **HTTPS-WEB** for the **HTTP setting name** and *80* for the **Backend port**. Accept the default values for the other settings in the **Add an HTTP setting** window, then select **Add** to return to the **Add a routing rule** window. 
+
+6. On the **Add a routing rule** window, select **Add** to save the routing rule and return to the **Configuration** tab.
+
+7. Select **Next: Tags** and then **Next: Review + create**.
+
+1. On the Azure portal menu, select **All resources** or search for and select *All resources*. Then select **AAGWEB**.
+
+2. Select **Backend pools** from the left menu.
+
+3. Select **BP-WEB**.
+
+4. Under **Backend targets**, **Target type**, select **Virtual machine** from the drop-down list.
+
+5. Under **Target**, select the **VMWEB01** and **VMWEB02** virtual machines and their associated network interfaces from the drop-down lists.
+
+6. Select **Save**.
+
+7. Wait for the deployment to complete before proceeding to the next step.
+
+1. Test the Application gateway.
+
+2. Find the public IP address for the Application gateway on its **Overview** page. 
+
+2. Copy the public IP address, and then paste it into the address bar of your browser to browse that IP address.
+
+3. Check the response. A valid response verifies that the application gateway was successfully created and can successfully connect with the backend.
+
+   Refresh the browser multiple times and you should see connections to both **VMWEB01** and **VMWEB02**.
 
 ## Lab 2 - Azure Virtual Machine Scale Sets (30 minutes)
 
